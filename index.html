@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Ma Formation">
+<title>Ma Formation</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#f2c6ce;
+  --white:#fff5f7;
+  --blue-light:#f8d8de;
+  --blue-mid:#e8a0ae;
+  --blue-main:#c0446a;
+  --blue-dark:#1a0810;
+  --text:#1a0810;
+  --muted:#8a4a5a;
+  --muted2:#e8b0bc;
+  --border:#eab0bc;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:40px}
+
+/* HERO */
+.hero{padding:32px 24px 20px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,#e8a0ae40,transparent 70%)}
+.hero-label{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.hero-name{font-family:'Playfair Display',serif;font-size:34px;font-weight:700;color:var(--blue-dark);line-height:1.1}
+.hero-name span{color:var(--blue-main)}
+.hero-sub{font-size:13px;color:var(--muted);margin-top:6px}
+
+/* GLOBAL PROGRESS */
+.global-card{margin:0 20px 20px;background:var(--white);border-radius:20px;border:1px solid var(--border);padding:20px 22px;box-shadow:0 2px 16px #c0446a10}
+.global-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
+.global-title{font-size:13px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted)}
+.global-pct{font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:var(--blue-main);line-height:1}
+.global-pct span{font-size:16px;font-weight:400;color:var(--muted)}
+.progress-bar-bg{height:10px;background:var(--blue-light);border-radius:6px;overflow:hidden;margin-bottom:10px}
+.progress-bar-fill{height:10px;background:linear-gradient(90deg,var(--blue-main),#e06080);border-radius:6px;transition:width 1s ease}
+.global-dates{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
+
+/* CAROUSEL */
+.carousel-wrap{margin:0 0 20px;position:relative}
+.carousel-track{display:flex;overflow-x:scroll;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:12px;padding:0 20px;scrollbar-width:none}
+.carousel-track::-webkit-scrollbar{display:none}
+.next-card{flex:0 0 calc(100% - 40px);scroll-snap-align:center;background:linear-gradient(135deg,#c0446a,#8a1a3a);border-radius:20px;padding:20px 22px;box-shadow:0 4px 20px #c0446a30}
+.next-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#90c4e8;margin-bottom:4px}
+.next-title{font-family:'Playfair Display',serif;font-size:20px;color:#fff;margin-bottom:14px;line-height:1.2}
+.next-counters{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.counter-box{background:rgba(255,255,255,0.12);border-radius:12px;padding:10px 6px;text-align:center;backdrop-filter:blur(4px)}
+.counter-val{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#fff;line-height:1}
+.counter-lbl{font-size:9px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#90c4e8;margin-top:3px}
+.next-date{font-size:11px;color:#90c4e8;margin-top:12px}
+.carousel-dots{display:flex;justify-content:center;gap:6px;margin:10px 0 0}
+.carousel-dot{width:6px;height:6px;border-radius:50%;background:#e8a0ae;transition:all .2s}
+.carousel-dot.active{background:#c0446a;width:18px;border-radius:3px}
+
+/* SECTION TITLE */
+.section-title{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding:0 24px;margin-bottom:10px}
+
+/* TIMELINE */
+.timeline{padding:0 20px;position:relative}
+.timeline::before{content:'';position:absolute;left:44px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--blue-main),var(--blue-light))}
+
+.milestone{display:flex;gap:0;margin-bottom:16px;position:relative}
+.ms-dot-wrap{width:48px;flex-shrink:0;display:flex;justify-content:center;z-index:1}
+.ms-dot{width:16px;height:16px;border-radius:50%;border:2.5px solid var(--white);margin-top:16px;flex-shrink:0;transition:all .3s}
+.ms-dot.done{background:#c0446a;border-color:#c0446a}
+.ms-dot.next{background:var(--white);border-color:#c0446a;box-shadow:0 0 0 4px #c0446a20}
+.ms-dot.future{background:#f8d8de;border-color:#e8a0ae}
+.ms-card{flex:1;background:var(--white);border-radius:16px;border:1px solid var(--border);padding:14px 16px;transition:all .3s}
+.ms-card.done{background:#f0f8fe;border-color:var(--blue-main)}
+.ms-card.next{background:var(--white);border-color:var(--blue-main);box-shadow:0 2px 12px #2a7ab820}
+.ms-card.future{background:var(--white);opacity:0.75}
+.ms-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 8px;border-radius:8px;margin-bottom:6px}
+.ms-badge.done{background:#dff0fa;color:var(--blue-main)}
+.ms-badge.next{background:var(--blue-main);color:#fff}
+.ms-badge.future{background:var(--blue-light);color:var(--muted)}
+.ms-title{font-size:14px;font-weight:600;color:var(--text);line-height:1.3}
+.ms-date{font-size:12px;color:var(--muted);margin-top:4px}
+.ms-days{font-size:11px;font-weight:600;color:var(--blue-main);margin-top:4px}
+.ms-days.done{color:#4ade80}
+.ms-days.future{color:var(--muted)}
+.ms-check{font-size:16px;float:right;margin-top:-2px}
+
+/* YEAR BLOCKS */
+.year-blocks{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 20px;margin-bottom:20px}
+.year-block{background:var(--white);border-radius:16px;border:1px solid var(--border);padding:14px}
+.yb-label{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.yb-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px;line-height:1.3}
+.yb-bar-bg{height:6px;background:var(--blue-light);border-radius:3px;overflow:hidden;margin-bottom:6px}
+.yb-bar-fill{height:6px;background:linear-gradient(90deg,var(--blue-main),#e06080);border-radius:3px}
+.yb-pct{font-size:12px;font-weight:600;color:var(--blue-main)}
+
+/* MOTIVATION */
+.motivation{margin:20px 20px 0;background:var(--white);border-radius:20px;border:1px solid var(--border);padding:20px 22px}
+.mot-emoji{font-size:32px;margin-bottom:8px}
+.mot-text{font-family:'Playfair Display',serif;font-size:16px;color:var(--blue-dark);line-height:1.5;font-style:italic}
+.mot-author{font-size:11px;color:var(--muted);margin-top:8px}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-label">Mon parcours</div>
+  <div class="hero-name">Chloé<span> ✦</span></div>
+  <div class="hero-sub">IFSI → Sage-Femme · 2025–2028</div>
+</div>
+
+<div class="global-card">
+  <div class="global-top">
+    <div class="global-title">Avancement global</div>
+    <div class="global-pct" id="global-pct">0<span>%</span></div>
+  </div>
+  <div class="progress-bar-bg">
+    <div class="progress-bar-fill" id="global-bar" style="width:0%"></div>
+  </div>
+  <div class="global-dates">
+    <span>Sept. 2025</span>
+    <span id="global-remaining"></span>
+    <span>Sept. 2028</span>
+  </div>
+</div>
+
+<div class="carousel-wrap">
+  <div class="carousel-track" id="carousel-track"></div>
+  <div class="carousel-dots" id="carousel-dots"></div>
+</div>
+
+<div class="section-title" style="margin-bottom:14px">Blocs annuels</div>
+<div class="year-blocks" id="year-blocks"></div>
+
+<div class="section-title">Timeline complète</div>
+<div class="timeline" id="timeline"></div>
+
+<div class="motivation" id="motivation">
+  <div class="mot-emoji" id="mot-emoji"></div>
+  <div class="mot-text" id="mot-text"></div>
+  <div class="mot-author" id="mot-author"></div>
+</div>
+
+<script>
+const START = new Date('2025-09-01');
+const END   = new Date('2028-09-04');
+
+const MILESTONES = [
+  { id:'y1',    title:'Fin 1ère année IFSI',        date:new Date('2026-06-26'), emoji:'🎓', phase:'IFSI 1' },
+  { id:'y2',    title:'Fin 2e année IFSI',           date:new Date('2027-06-25'), emoji:'📚', phase:'IFSI 2' },
+  { id:'doss',  title:'Dossier passerelle ESF',      date:new Date('2028-03-15'), emoji:'📝', phase:'Passerelle' },
+  { id:'oral',  title:'Oral passerelle ESF',         date:new Date('2028-05-02'), emoji:'🎤', phase:'Passerelle' },
+  { id:'adm',   title:'Admission passerelle ESF',    date:new Date('2028-06-01'), emoji:'✅', phase:'Passerelle' },
+  { id:'ifsi',  title:'Formation IFSI terminée',     date:new Date('2028-06-23'), emoji:'🏆', phase:'IFSI 3' },
+  { id:'rentree',title:'Rentrée Sage-Femme',         date:new Date('2028-09-04'), emoji:'🌸', phase:'SF' },
+];
+
+const YEAR_BLOCKS = [
+  { label:'1ère année', sub:'IFSI',      start:new Date('2025-09-01'), end:new Date('2026-06-26') },
+  { label:'2e année',   sub:'IFSI',      start:new Date('2026-09-01'), end:new Date('2027-06-25') },
+  { label:'3e année',   sub:'IFSI + ESF',start:new Date('2027-09-01'), end:new Date('2028-06-23') },
+  { label:'Objectif',   sub:'Sage-Femme',start:new Date('2028-06-23'), end:new Date('2028-09-04') },
+];
+
+const QUOTES = [
+  { text:'Chaque jour de cours est un pas de plus vers tes patientes.', emoji:'💙', author:'Pour Chloé' },
+  { text:'La route est longue, mais chaque étape franchie te rapproche de qui tu veux devenir.', emoji:'🌿', author:'Pour Chloé' },
+  { text:'Tu n\'es pas juste étudiante. Tu te construis.', emoji:'🌸', author:'Pour Chloé' },
+  { text:'La fatigue d\'aujourd\'hui, c\'est la compétence de demain.', emoji:'⭐', author:'Pour Chloé' },
+  { text:'Sage-femme. Ce n\'est pas un métier. C\'est une vocation.', emoji:'🤍', author:'Pour Chloé' },
+];
+
+function daysBetween(a, b) {
+  return Math.round((b - a) / (1000 * 60 * 60 * 24));
+}
+
+function fmtDate(d) {
+  const j = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  return d.getDate() + ' ' + j[d.getMonth()] + ' ' + d.getFullYear();
+}
+
+function clamp(v, min, max) { return Math.min(max, Math.max(min, v)); }
+
+function render() {
+  const now = new Date(); now.setHours(0,0,0,0);
+
+  // Global progress
+  const totalDays = daysBetween(START, END);
+  const doneDays  = daysBetween(START, now);
+  const globalPct = clamp(Math.round(doneDays / totalDays * 100), 0, 100);
+  const remaining = daysBetween(now, END);
+
+  document.getElementById('global-pct').innerHTML = globalPct + '<span>%</span>';
+  document.getElementById('global-bar').style.width = globalPct + '%';
+  document.getElementById('global-remaining').textContent = remaining > 0 ? remaining + ' jours restants' : 'Terminé 🎉';
+
+  // Carousel — toutes les étapes futures
+  const futureMs = MILESTONES.filter(m => m.date >= now);
+  const track = document.getElementById('carousel-track');
+  const dotsEl = document.getElementById('carousel-dots');
+  track.innerHTML = '';
+  dotsEl.innerHTML = '';
+
+  if (futureMs.length === 0) {
+    track.innerHTML = '<div class="next-card"><div style="text-align:center;padding:10px"><div style="font-size:32px">🌸</div><div style="color:#fff;font-family:Playfair Display,serif;font-size:20px;margin-top:8px">Formation terminée !</div></div></div>';
+  } else {
+    futureMs.forEach((m, i) => {
+      const daysLeft = daysBetween(now, m.date);
+      const weeksLeft = Math.floor(daysLeft / 7);
+      const monthsLeft = Math.round(daysLeft / 30.5);
+      // % depuis le 1er sept 2025 pour chaque étape
+      const stepTotal = daysBetween(START, m.date);
+      const stepDone  = daysBetween(START, now);
+      const stepPct   = clamp(Math.round(stepDone / stepTotal * 100), 0, 100);
+
+      const card = document.createElement('div');
+      card.className = 'next-card';
+      card.innerHTML = `
+        <div class="next-label">${i === 0 ? '⏳ Prochaine étape' : '📅 Étape ' + (i+1) + ' / ' + futureMs.length}</div>
+        <div class="next-title">${m.emoji}&nbsp;&nbsp;${m.title}</div>
+        <div class="next-counters">
+          <div class="counter-box"><div class="counter-val">${daysLeft}</div><div class="counter-lbl">Jours</div></div>
+          <div class="counter-box"><div class="counter-val">${weeksLeft}</div><div class="counter-lbl">Sem.</div></div>
+          <div class="counter-box"><div class="counter-val">${monthsLeft}</div><div class="counter-lbl">Mois</div></div>
+          <div class="counter-box"><div class="counter-val">${stepPct}%</div><div class="counter-lbl">Fait</div></div>
+        </div>
+        <div class="next-date">📅 ${fmtDate(m.date)}</div>`;
+      track.appendChild(card);
+
+      const dot = document.createElement('div');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dotsEl.appendChild(dot);
+    });
+
+    // Dots sync with scroll
+    track.addEventListener('scroll', () => {
+      const idx = Math.round(track.scrollLeft / (track.scrollWidth / futureMs.length));
+      document.querySelectorAll('.carousel-dot').forEach((d, i) => {
+        d.className = 'carousel-dot' + (i === idx ? ' active' : '');
+      });
+    }, {passive:true});
+  }
+
+  // Year blocks
+  const yb = document.getElementById('year-blocks');
+  yb.innerHTML = '';
+  YEAR_BLOCKS.forEach(b => {
+    const total = daysBetween(b.start, b.end);
+    const done  = clamp(daysBetween(b.start, now), 0, total);
+    const pct   = Math.round(done / total * 100);
+    const div = document.createElement('div');
+    div.className = 'year-block';
+    div.innerHTML = `
+      <div class="yb-label">${b.sub}</div>
+      <div class="yb-title">${b.label}</div>
+      <div class="yb-bar-bg"><div class="yb-bar-fill" style="width:${pct}%"></div></div>
+      <div class="yb-pct">${pct}%</div>`;
+    yb.appendChild(div);
+  });
+
+  // Timeline
+  const tl = document.getElementById('timeline');
+  tl.innerHTML = '';
+  MILESTONES.forEach((m, idx) => {
+    const isPast = m.date < now;
+    const isNext = !isPast && (idx === 0 || MILESTONES[idx-1].date < now);
+    const status = isPast ? 'done' : isNext ? 'next' : 'future';
+    const daysLeft = daysBetween(now, m.date);
+    const daysAgo  = daysBetween(m.date, now);
+
+    let daysText = '';
+    if (isPast) daysText = `✓ Il y a ${daysAgo} jour${daysAgo>1?'s':''}`;
+    else if (isNext) daysText = `→ Dans ${daysLeft} jour${daysLeft>1?'s':''}`;
+    else daysText = `Dans ${daysLeft} jour${daysLeft>1?'s':''}`;
+
+    const el = document.createElement('div');
+    el.className = 'milestone';
+    el.innerHTML = `
+      <div class="ms-dot-wrap"><div class="ms-dot ${status}"></div></div>
+      <div class="ms-card ${status}">
+        <div>
+          <span class="ms-badge ${status}">${m.phase}</span>
+          ${isPast ? '<span class="ms-check">✅</span>' : ''}
+        </div>
+        <div class="ms-title">${m.emoji} ${m.title}</div>
+        <div class="ms-date">${fmtDate(m.date)}</div>
+        <div class="ms-days ${status}">${daysText}</div>
+      </div>`;
+    tl.appendChild(el);
+  });
+
+  // Quote du jour
+  const q = QUOTES[Math.floor(now.getTime() / 86400000) % QUOTES.length];
+  document.getElementById('mot-emoji').textContent = q.emoji;
+  document.getElementById('mot-text').textContent = q.text;
+  document.getElementById('mot-author').textContent = '— ' + q.author;
+}
+
+render();
+</script>
+</body>
+</html>
